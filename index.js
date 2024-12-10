@@ -85,6 +85,10 @@ function buildWhereClause(filters, queryParams) {
     }
   }
 
+  console.log('SQL Query:', sqlQuery);
+  console.log('Query Parameters:', queryParams);
+  
+
   return whereClause;
 }
 
@@ -108,6 +112,9 @@ app.get('/api/search', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err });
   }
+
+  console.log('Filters:', filters);
+
 });
 
 // Start server on port 5001
