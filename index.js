@@ -85,10 +85,6 @@ function buildWhereClause(filters, queryParams) {
     }
   }
 
-  console.log('SQL Query:', sqlQuery);
-  console.log('Query Parameters:', queryParams);
-  
-
   return whereClause;
 }
 
@@ -112,6 +108,10 @@ app.get('/api/search', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err });
   }
+
+ // Log the SQL query and parameters here
+  console.log('SQL Query:', sqlQuery);
+  console.log('Query Parameters:', queryParams);
 
   console.log('Filters:', filters);
 
