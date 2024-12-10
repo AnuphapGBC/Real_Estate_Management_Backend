@@ -30,6 +30,7 @@ const db = mysql.createPool({
 })();
 
 // Utility function to build dynamic WHERE clauses
+// Utility function to build dynamic WHERE clauses
 function buildWhereClause(filters, queryParams) {
   let whereClause = ' WHERE all_list_units.Status = "Available"';
 
@@ -52,8 +53,12 @@ function buildWhereClause(filters, queryParams) {
           whereClause += ' AND all_list_units.Area = ?';
           queryParams.push(value);
           break;
-        case 'price':
-          whereClause += ' AND all_list_units.Price = ?';
+        case 'minPrice': // Add logic for Min Price
+          whereClause += ' AND all_list_units.Price >= ?';
+          queryParams.push(value);
+          break;
+        case 'maxPrice': // Add logic for Max Price
+          whereClause += ' AND all_list_units.Price <= ?';
           queryParams.push(value);
           break;
         case 'project_id':
@@ -82,6 +87,7 @@ function buildWhereClause(filters, queryParams) {
 
   return whereClause;
 }
+
 
 // API route for general search across multiple columns (with location)
 app.get('/api/search', async (req, res) => {
